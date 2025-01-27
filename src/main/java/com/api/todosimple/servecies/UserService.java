@@ -43,7 +43,7 @@ public class UserService {
         User newObj = findById(obj.getId());
         newObj.setPassword(obj.getPassword());
 
-        return this.userRepository.save(newObj;
+        return this.userRepository.save(newObj);
     }
 
     @Transactional
