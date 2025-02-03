@@ -52,4 +52,28 @@ public class Task {
     public int hashCode() {
         return Objects.hash(id, user, description);
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public @NotNull @NotEmpty @Size(min = 1, max = 255) String getDescription() {
+        return description;
+    }
+
+    public void setDescription(@NotNull @NotEmpty @Size(min = 1, max = 255) String description) {
+        this.description = description;
+    }
 }

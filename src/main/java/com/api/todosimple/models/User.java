@@ -1,6 +1,7 @@
 package com.api.todosimple.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -28,7 +29,7 @@ public class User {
     @Size(groups = createUser.class, min = 10, max = 100)
     @NotNull(groups = createUser.class)
     @NotEmpty(groups = createUser.class)
-    private String name;
+    private String userName;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "password", length = 60, nullable = false)
@@ -46,7 +47,7 @@ public class User {
 
     public User(Long id, String name, String password) {
         this.id = id;
-        this.name = name;
+        this.userName = name;
         this.password = password;
     }
 
@@ -55,13 +56,13 @@ public class User {
         if (this == o) return true;
         if (!(o instanceof User user)) return false;
         return Objects.equals(id, user.id)
-                && Objects.equals(name, user.name)
+                && Objects.equals(userName, user.userName)
                 && Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, password, task);
+        return Objects.hash(id, userName, password, task);
     }
 
     public Long getId() {
@@ -73,11 +74,11 @@ public class User {
     }
 
     public @Size(groups = createUser.class, min = 10, max = 100) @NotNull(groups = createUser.class) @NotEmpty(groups = createUser.class) String getName() {
-        return name;
+        return userName;
     }
 
     public void setName(@Size(groups = createUser.class, min = 10, max = 100) @NotNull(groups = createUser.class) @NotEmpty(groups = createUser.class) String name) {
-        this.name = name;
+        this.userName = name;
     }
 
     public @Size(groups = {createUser.class, updateUser.class}, min = 8, max = 60) @NotNull(groups = {createUser.class, updateUser.class}) @NotEmpty(groups = {createUser.class, updateUser.class}) String getPassword() {
@@ -87,7 +88,7 @@ public class User {
     public void setPassword(@Size(groups = {createUser.class, updateUser.class}, min = 8, max = 60) @NotNull(groups = {createUser.class, updateUser.class}) @NotEmpty(groups = {createUser.class, updateUser.class}) String password) {
         this.password = password;
     }
-
+    @JsonIgnore
     public List<Task> getTask() {
         return task;
     }
